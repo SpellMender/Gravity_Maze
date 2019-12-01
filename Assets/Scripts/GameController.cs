@@ -6,6 +6,8 @@ public class GameController : MonoBehaviour
 {
 
     public static GameController instance;
+    public GameObject victoryMsg;
+    public GameObject instructions;
 
     //These boolean variables determine direction of gravity
     public bool gravX = false; //Does gravity work in the x direction
@@ -25,15 +27,15 @@ public class GameController : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    void Victory()
     {
-        
+        victoryMsg.SetActive(true);
+        instructions.SetActive(false);
+        instance.GetComponent<BoxCollider2D>().enabled = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        Victory();
     }
 }

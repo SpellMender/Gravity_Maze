@@ -38,7 +38,10 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        magnitude = instance.magnitude;
+        jumpMag = instance.jumpMag;
+        moveSpeed = instance.moveSpeed;
+        rb2d = gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -170,12 +173,12 @@ public class Player : MonoBehaviour
         }
 
         //Move
-        transform.Translate(movement * moveSpeed * Time.deltaTime, Space.World); //Rotation handler gets input [See Above]
+        transform.Translate(movement * moveSpeed * Time.smoothDeltaTime, Space.World); //Rotation handler gets input [See Above]
 
     }
 
     //The trigger is on the bottom of the player
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         jumping = false;
         canRotate = true; //Rotation is enabled when the player touches the ground at least once
@@ -184,5 +187,4 @@ public class Player : MonoBehaviour
     {
         jumping = true;
     }
-
 }
